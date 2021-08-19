@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 const user = [
   {
     email: 'park@loop-fitb.com', 
-    password: bcrypt.hash('$2b$10$6uhMfvWOryuPUTdCqbKnFuz4u1mY1LvKR6YyzvhBhHMDrrFUEBLVy', 10), 
+    password: bcrypt.hash('123456789', 10), 
     name: 'Sugyong Park'
   },
   {
@@ -62,15 +62,17 @@ app.post('/login', async　(req, res) => {
   res.send("Received POST Data!");
   const email = req.body.email;
   const password = req.body.password;
-  console.log(bcrypt.hash('123456789', 10))
-  const hashed = await　bcrypt.hash(req.body.password, 10)
-  // bcrypt.compare(ユーザーが入力したpassword, DBから引っ張ってきたハッシュ化済のpassword)
-  // bcrypt.compareもPromiseが返してくるのでasync,awaitで制御を加える
-  // 照合が終わったら次の処理へ進むようになる
-  
+  const hashed = await bcrypt.hash(password, 10)
   console.log(hashed)
+  bcrypt.compare(hashed.password , user.password  , (error , isEqual) => {
+    if (isEqual) {
+
+      console.log("ログイン出来ました")
+    } else {
+      console.log("ログイン失敗しました")
+    }
+  });
+
+  
 })
 module.exports = app;
-
-
-ああああ
