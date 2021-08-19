@@ -65,10 +65,13 @@ app.post('/login', async　(req, res) => {
   const password = req.body.password;
   const hashed = await bcrypt.hash(password, 10)
   console.log(hashed)
-  console.log(user[0].password);
 
+  ///ユーザーの特定
+  const found = user.find(users => { return users.email === req.body.email;})
+  console.log(found.password);
 
-  bcrypt.compare(hashed , user.password  , (error , isEqual) => {
+  ///compare関数で比較
+  bcrypt.compare(password , found.password  , (error , isEqual) => {
     if (isEqual) {
       console.log("ログイン出来ました")
     } else {
@@ -77,5 +80,3 @@ app.post('/login', async　(req, res) => {
   });
 })
 module.exports = app;
-
-
