@@ -8,20 +8,21 @@ app.use(express.urlencoded({ extended: true }));
 const user = [
   {
     email: 'park@loop-fitb.com', 
-    password: bcrypt.hash('123456789', 10), 
+    password: '$2b$10$GLMoJM4BpyC54g6NKbvO0u15dVWYxfZaGqTbRSJgxonfvYd03Goey', 
     name: 'Sugyong Park'
   },
   {
     email: 'jimbo@loop-fitb.com', 
-    password: bcrypt.hash('asdfgh', 10), 
+    password: '$2b$10$gpkSzmzliBVDGU89bZnofextcQDSNP0xL.vRJ1buJVCDAgJTqMC4S', 
     name: 'Shin Jimbo'
   },  
   {
     email: 'fan@loop-fitb.com', 
-    password: bcrypt.hash('12345dfsdf', 10), 
+    password: '$2b$10$rUgHgNFkmRui9ojdrR.b3.o2KiWkvJfopIg6r5E9tPZzAO9IiHVLm', 
     name: 'Wei Fan'
   },
 ];
+
 const productdb = [
   {productID: '1', productName: 'T-Shirt', price: 4800},
   {productID: '2', productName: 'Jacket', price: 19800},
@@ -64,15 +65,17 @@ app.post('/login', async　(req, res) => {
   const password = req.body.password;
   const hashed = await bcrypt.hash(password, 10)
   console.log(hashed)
-  bcrypt.compare(hashed.password , user.password  , (error , isEqual) => {
-    if (isEqual) {
+  console.log(user[0].password);
 
+
+  bcrypt.compare(hashed , user.password  , (error , isEqual) => {
+    if (isEqual) {
       console.log("ログイン出来ました")
     } else {
       console.log("ログイン失敗しました")
     }
   });
-
-  
 })
 module.exports = app;
+
+
