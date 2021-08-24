@@ -66,24 +66,19 @@ app.post('/login', async　(req, res) => {
   console.log(hashed)
 
   ///ユーザーの特定
-  const found = user.find(users => { return users.email === req.body.email;})
-  
-  console.log(found.password);
+  const found =  user.find(users => { return users.email === req.body.email;})
+  if (found){
+    console.log(found.password);
+  }else{
+    res.status(400).send　('メールアドレスの不一致')
+  };
 
-  ///compare関数で比較
-  
-  const userinformation = {
-    userName: found.name,
-    useremail: found.email,
-  }
-
-  bcrypt.compare((error , isEqual) => {
-    if (password , found.password && email , found.email) {
-      return res.status(200).send(userinformation);
-    }else　if (email !== found.email){
-      return res.status(404).send('メールアドレス不一致');
-    }else (password !== found.password)
-     return res.status(400).send('パスワード不一致');
+  bcrypt.compare(password , found.password  , (error , isEqual) => {
+    if (isEqual) {
+      return res.status(200).send('ログイン成功');
+    } else {
+      return res.status(404).send('パスワードの不一致');
+    }
   });
 })
 module.exports = app;
