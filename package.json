@@ -1,0 +1,27 @@
+{
+  "name": "sample-api",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=15.0.0"
+  },
+  "scripts": {
+    "start": "node bin/www.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-domain-middleware": "^0.1.0",
+    "express-promise-router": "^3.0.3",
+    "express-session": "^1.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1"
+  }
+}
